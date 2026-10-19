@@ -1,6 +1,7 @@
 import "./globals.css";
 import { CartProvider } from "../src/context/CartContext";
 import { CartDrawer } from "../src/components/ui/CartDrawer";
+import { Header } from "../src/components/layout/Header";
 
 export const metadata = {
   title: "Кварта — Обжарочная мастерская в Минске",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="ru">
       <body>
         <CartProvider>
+          <Header />
           {children}
           <CartDrawer />
         </CartProvider>

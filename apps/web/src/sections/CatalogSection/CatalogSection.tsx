@@ -46,7 +46,7 @@ export const PRODUCTS = [
 ];
 
 interface CatalogSectionProps {
-  onOpenModal: (
+  onOpenModal?: (
     productName: string,
     type: "subscription" | "single" | "question",
   ) => void;
@@ -84,6 +84,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
             </div>
             <button
               onClick={() =>
+                onOpenModal &&
                 onOpenModal(
                   item.name,
                   item.type === "subscription" ? "subscription" : "single",

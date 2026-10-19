@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Header } from "../src/components/layout/Header";
 import { HeroSection } from "../src/sections/HeroSection/HeroSection";
 import { AboutSection } from "../src/sections/AboutSection/AboutSection";
 import { CatalogSection } from "../src/sections/CatalogSection/CatalogSection";
@@ -17,8 +16,8 @@ export default function Home() {
   const [initialComment, setInitialComment] = useState("");
 
   const handleOpenModal = (
-    productName: string,
-    type: "subscription" | "single" | "question",
+    productName: string = "Консультация",
+    type: "subscription" | "single" | "question" = "single",
   ) => {
     setRequestType(type);
     setInitialComment(`Интересует: ${productName}`);
@@ -27,12 +26,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen selection:bg-[var(--accent)] selection:text-white">
-      <Header onOpenModal={handleOpenModal} />
-
       <main>
         <HeroSection onOpenModal={handleOpenModal} />
         <AboutSection />
-        <CatalogSection onOpenModal={handleOpenModal} />
+        <CatalogSection />
         <DeliverySection onOpenModal={handleOpenModal} />
       </main>
 

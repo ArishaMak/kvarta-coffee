@@ -27,16 +27,40 @@ export const CartDrawer: React.FC = () => {
 
   if (!isCartOpen) return null;
 
-  const handleCheckout = (e: React.FormEvent) => {
+  const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone) return;
-    setIsSubmitted(true);
-    setTimeout(() => {
-      clearCart();
-      setIsSubmitted(false);
-      setIsCartOpen(false);
-      setPhone("");
-    }, 3000);
+
+    try {
+      // Отправляем лид (заказ) на бэкенд NestJS
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone,
+            items,
+            totalPrice,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Не удалось отправить заказ");
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        clearCart();
+        setIsSubmitted(false);
+        setIsCartOpen(false);
+        setPhone("");
+      }, 3000);
+    } catch (error) {
+      console.error("Ошибка оформления заказа:", error);
+      alert("Не удалось отправить заказ. Убедитесь, что бэкенд запущен.");
+    }
   };
 
   return (
