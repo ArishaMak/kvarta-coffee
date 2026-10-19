@@ -5,6 +5,7 @@ import { AppService } from './app.service.js';
 import { LeadsModule } from './leads/leads.module.js';
 import { ProductsController } from './products/products.controller.js';
 import { ProductsService } from './products/products.service.js';
+import { AuthModule } from './auth/auth.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -16,6 +17,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       serviceId: 'api',
     }),
     LeadsModule,
+    AuthModule,
   ],
   controllers: [AppController, ProductsController],
   providers: [AppService, ProductsService],
